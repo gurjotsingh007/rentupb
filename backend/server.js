@@ -10,9 +10,9 @@ async function startServer() {
         await connectDatabase();
 
         cloudinary.config({
-            cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-            api_key: process.env.CLOUDINARY_API_KEY,
-            api_secret: process.env.CLOUDINARY_API_SECRET,
+            cloud_name: 'dl8uix1z9',
+            api_key: '786211711552324',
+            api_secret: 'U9wVS1ywp2haJbd_CTOAVK3hrHk',
             secure: true
         });
 
