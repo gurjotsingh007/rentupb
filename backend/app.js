@@ -3,7 +3,13 @@ const app = express();
 const cookieParser = require('cookie-parser');
 const fileUpload = require("express-fileupload");
 const errorMiddleware = require('./middleware/error');
+const cors = require('cors');
 
+app.use(cors({
+  origin: 'https://rentup-frontend.netlify.app', // your exact Netlify URL
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+}));
 // Increase limits for JSON and URL-encoded payloads
 app.use(express.json({ limit: '100mb' })); // Adjust the limit according to your requirement
 app.use(express.urlencoded({ limit: '100mb', extended: true, parameterLimit: 100000 })); // Adjust the limit according to your requirement
