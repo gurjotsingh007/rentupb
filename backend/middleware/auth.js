@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 const User = require('../model/userModel');
 
 exports.isUserIsAuthenticated = catchAyncHandler(async (req, res, next) => {
-    // check header first, then cookie as fallback
     let token;
 
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
