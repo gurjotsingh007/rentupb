@@ -1,8 +1,6 @@
 const app = require('./app');
 const connectDatabase = require('./config/db');
-const path = require('path');
 const cloudinary = require('cloudinary').v2;
-const express = require('express');
 require('dotenv').config();
 
 async function startServer() {
@@ -15,14 +13,6 @@ async function startServer() {
             api_secret: 'U9wVS1ywp2haJbd_CTOAVK3hrHk',
             secure: true
         });
-
-        // Only serve frontend build if it exists (for full-stack deployments)
-        // Remove this block if deploying backend only on Render
-        const __dirname = path.resolve();
-        app.use(express.static(path.join(__dirname, '/frontend/build')));
-        app.get('*', (req, res) =>
-            res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
-        );
 
         const PORT = process.env.PORT || 3000;
 
@@ -51,5 +41,4 @@ function shutdown(server) {
         process.exit(1);
     });
 }
-
 startServer();
