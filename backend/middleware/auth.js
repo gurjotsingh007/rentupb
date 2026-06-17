@@ -1,13 +1,22 @@
 const ErrorHandler = require("../util/errorHandler");
 const catchAyncHandler = require("./catchAyncHandler");
 const jwt = require('jsonwebtoken');
-const User = require('../model/userModel')
+const User = require('../model/userModel');
 
-exports.isUserIsAuthenticated = catchAyncHandler(async(req, res, next) => {
-    const token = req.cookies.token;
-    if(!token){
+exports.isUserIsAuthenticated = catchAyncHandler(async (req, res, next) => {
+    // check header first, then cookie as fallback
+    let token;
+
+    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+        token = req.headers.authorization.split(' ')[1];
+    } else if (req.cookies.token) {
+        token = req.cookies.token;
+    }
+
+    if (!token) {
         return next(new ErrorHandler('User must be logged in to access', 401));
     }
+
     const decodedToken = jwt.verify(token, 'ASDFGHJKLELLEASDFGHJKL');
     req.user = await User.findById(decodedToken.id);
     next();
