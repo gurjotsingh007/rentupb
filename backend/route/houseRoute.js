@@ -6,7 +6,7 @@ const router = express.Router();
 router.route('/get-all-houses').get(getAllHouseData);
 router.route('/get-all-cities').get(getAllCities);
 router.route('/get-newly-registered-property').get(getTop6Houses);
-router.route('/get-single-house-data/:id').get(isUserIsAuthenticated, getSingleHouseDetail);
+router.route('/get-single-house-data/:id').get(getSingleHouseDetail);
 router.route('/get-my-listings/:id').get(isUserIsAuthenticated, getMyListings);
 router.route('/update-house/:id').put(isUserIsAuthenticated, updateHouseData);
 router.route('/create-review/:id').post(isUserIsAuthenticated, createHouseReview);
